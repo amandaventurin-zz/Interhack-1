@@ -1,1 +1,21 @@
-<h1> AAAAA</h1>
+<link rel="stylesheet" href="/static/style.css" type="text/css"></link>
+<div class="w-full flex flex-wrap">
+    {% for project in projects %}
+    <a href="/projetos.html" class="w-full md:w-1/2 lg:w-1/4 px-4 py-4">
+        <div class="mx-auto max-w-sm rounded overflow-hidden shadow-lg">
+            <img class="w-full h-40 my-auto object-fit" src="{{project.image}}" alt="Sunset in the mountains">
+            <div class="px-6 py-4">
+                <div class="font-bold text-2xl mb-2">{{project.title}}</div>
+                <p class="text-gray-700 text-base">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                </p>
+            </div>
+            <div class="px-6 py-4">
+                <span class="inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                <span class="inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                <span class="inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
