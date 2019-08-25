@@ -1,5 +1,30 @@
 @import url("/static/tailwind.min.css");
 
+body{
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+div#body-gradient {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: -10;
+}
+
+.gradient {
+	background: linear-gradient(90deg, #0075F2 0%, #1E3888 100%);"
+}
+
+.bg-blue {
+	background: #0074F2;
+}
+
+.bg-green {
+	background: #9EE493;
+}
+
 .bg-colorful{
 	background-color: #2EC4B6;
 }
@@ -18,6 +43,11 @@
 
 .semi-transparent{
 	opacity: 0.8;
+}
+
+.text-green{
+	color: #9EE493;
+	font-weight: bold;
 }
 
 nav {

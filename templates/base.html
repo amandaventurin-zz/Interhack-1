@@ -2,53 +2,73 @@
 <html lang="en">
 <head>
     {% block head %}
+      <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>{% block title %}{% endblock %} - Zeta</title>
+
+
     <link rel="stylesheet" href="/static/style.css" type="text/css"></link>
-    <title>{% block title %}{% endblock %} - Agregari</title>
     {% endblock %}
 </head>
-<body>
-    <div id="content">
-    	{% block content %}
-    	<nav class="flex items-center justify-between flex-wrap bg-white shadow-lg p-4">
-		  <div class="flex items-center flex-shrink-0 mr-6">
-		  	<img src="/static/img/logo.svg" class="h-8 mr-2"/>
-		  </div>
-		  <div class="block lg:hidden">
-		    <button class="flex items-center px-3 py-2 border rounded text-colorful-bg border-colorful-bg hover:text-lighten-on-hover hover:border-darken">
-		      <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-		    </button>
-		  </div>
-		  <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-		    <div class="text-sm lg:flex-grow">
-		      <a href="feed.html" class="block mt-4 lg:inline-block lg:mt-0 text-colorful-bg text-lighten mr-4">
-		        Feed
-		      </a>
-		      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-colorful-bg text-lighten-on-hover mr-4">
-		        Pesquisar projetos
-		      </a>
-		      <a href="novo_projeto" class="block mt-4 lg:inline-block lg:mt-0 text-colorful-bg text-lighten-on-hover mr-4">
-		        Adicionar projeto
-		      </a>
-		      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-colorful-bg text-lighten-on-hover">
-		        Favoritos
-		      </a>
-		    </div>
-		    
-		  </div>
-		</nav>
-    	{% endblock %}
-	</div>
+<body class="leading-normal tracking-normal text-white">
+	{% block bodybg %}{% endblock %}
+	{% block nav %}
+	<nav id="header" class="fixed sm:px-5 md:px-12 w-full z-30 top-0 text-white">
+		<div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+				
+			<div class="flex items-center">
+				<a class="toggleColour text-white no-underline hover:no-underline"  href="#"> 
+					<img id="logo-nav" src="/static/img/logo-white.svg" class="h-8 mr-2"/>
+				</a>
+			</div>
+
+			<div class="block lg:hidden pr-4">
+				<button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-800 hover:border-teal-500 appearance-none focus:outline-none">
+					<svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+				</button>
+			</div>
+
+			<div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
+				<ul class="list-reset lg:flex justify-end flex-1 items-center">
+					<li class="mr-3">
+						<a class="inline-block py-2 px-4 text-black font-bold no-underline" href="feed.html">Feed</a>
+					</li>
+					<li class="mr-3">
+						<a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="pesquisar.html">Pesquisar Projetos</a>
+					</li>
+					<li class="mr-3">
+						<a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="novo_projeto">Adicionar Projeto</a>
+					</li>
+					<li class="mr-3">
+						<a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="favoritos">Favoritos</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
+	</nav>
+	{% endblock %}
+
 	{% block page %}{% endblock %}
     {% block footer %}
-    <div id="footer" class="desktop-footer bg-colorful text-white flex items-center justify-between flex-wrap px-4 py-10">
-        <div class="w-1/4">
-		  	<img src="/static/img/logo-white.svg" class="h-5 semi-transparent"/>
-		</div>
-		<div class="w-1/2 text-center">
-			&copy; Copyright 2019 by <a href="/static/landing.html">Agregari</a>.
-		</div>
-		<span class="w-1/4"></span>
-    </div>
+    <footer class="bg-white">
+		<div class="container mx-auto sm:px-5 md:px-12">
+
+	        <div class="w-full flex flex-col md:flex-row py-6">
+					
+				<div class="flex-1">
+					<img class="h-8 inline" src="/static/img/logo.svg"/>
+				</div>
+			    
+	            <div class="flex-1 contnt-center text-right">
+	            	<p class="text-gray-500 md:mb-1 md:mt-1">&copy; Copyright 2019 by <a href="/static/landing.html">Zeta</a>.</p>
+	            </div>
+	        </div>
+	    </div>
+	</footer>
     {% endblock %}
 </body>
 </html>
