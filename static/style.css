@@ -13,6 +13,10 @@ div#body-gradient {
 	z-index: -10;
 }
 
+.min-h-80vh {
+	min-height: 80vh;
+}
+
 .gradient {
 	background: linear-gradient(90deg, #0075F2 0%, #1E3888 100%);"
 }

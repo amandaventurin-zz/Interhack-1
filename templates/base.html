@@ -8,19 +8,19 @@
 
     <title>{% block title %}{% endblock %} - Zeta</title>
 
-
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css" type="text/css"></link>
     {% endblock %}
 </head>
+{% block body %}
 <body class="leading-normal tracking-normal">
-	{% block bodybg %}{% endblock %}
 	{% block nav %}
-	<nav id="header" class="fixed sm:px-5 md:px-12 w-full z-30 top-0 text-white">
+	<nav id="header" class="fixed sm:px-5 md:px-12 w-full z-30 top-0 text-white bg-white">
 		<div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
 				
 			<div class="flex items-center">
 				<a class="toggleColour text-white no-underline hover:no-underline"  href="index.html"> 
-					<img id="logo-nav" src="/static/img/logo-white.svg" class="h-8 mr-2"/>
+					<img id="logo-nav" src="/static/img/logo.svg" class="h-8 mr-2"/>
 				</a>
 			</div>
 
@@ -51,8 +51,9 @@
 		<hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
 	</nav>
 	{% endblock %}
-
+	<div class="mt-16 min-h-80vh">
 	{% block page %}{% endblock %}
+	</div>
     {% block footer %}
     <footer class="bg-white">
 		<div class="container mx-auto sm:px-5 md:px-12">
@@ -71,4 +72,5 @@
 	</footer>
     {% endblock %}
 </body>
+{% endblock %}
 </html>
