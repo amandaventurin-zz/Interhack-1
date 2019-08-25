@@ -8,19 +8,19 @@
 
     <title>{% block title %}{% endblock %} - Zeta</title>
 
-
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css" type="text/css"></link>
     {% endblock %}
 </head>
+{% block body %}
 <body class="leading-normal tracking-normal">
-	{% block bodybg %}{% endblock %}
 	{% block nav %}
-	<nav id="header" class="fixed sm:px-5 md:px-12 w-full z-30 top-0 text-white">
+	<nav id="header" class="fixed sm:px-5 md:px-12 w-full z-30 top-0 text-white bg-white">
 		<div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
 				
 			<div class="flex items-center">
-				<a class="toggleColour text-white no-underline hover:no-underline"  href="index.html"> 
-					<img id="logo-nav" src="/static/img/logo-white.svg" class="h-8 mr-2"/>
+				<a class="toggleColour text-white no-underline hover:no-underline"  href="/"> 
+					<img id="logo-nav" src="/static/img/logo.svg" class="h-8 mr-2"/>
 				</a>
 			</div>
 
@@ -33,10 +33,10 @@
 			<div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
 				<ul class="list-reset lg:flex justify-end flex-1 items-center">
 					<li class="mr-3">
-						<a class="inline-block py-2 px-4 text-black font-bold no-underline" href="feed.html">Feed</a>
+						<a class="inline-block py-2 px-4 text-black font-bold no-underline" href="feed/">Feed</a>
 					</li>
 					<li class="mr-3">
-						<a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="pesquisar.html">Pesquisar Projetos</a>
+						<a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="pesquisar/">Pesquisar Projetos</a>
 					</li>
 					<li class="mr-3">
 						<a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="novo_projeto">Adicionar Projeto</a>
@@ -51,8 +51,9 @@
 		<hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
 	</nav>
 	{% endblock %}
-
+	<div class="mt-16 min-h-80vh">
 	{% block page %}{% endblock %}
+	</div>
     {% block footer %}
     <footer class="bg-white">
 		<div class="container mx-auto sm:px-5 md:px-12">
@@ -64,11 +65,12 @@
 				</div>
 			    
 	            <div class="flex-1 contnt-center text-right">
-	            	<p class="text-gray-500 md:mb-1 md:mt-1">&copy; Copyright 2019 by <a href="/static/landing.html">Zeta</a>.</p>
+	            	<p class="text-gray-500 md:mb-1 md:mt-1">&copy; Copyright 2019 by <a href="/static/landing/">Zeta</a>.</p>
 	            </div>
 	        </div>
 	    </div>
 	</footer>
     {% endblock %}
 </body>
+{% endblock %}
 </html>
