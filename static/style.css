@@ -1,1 +1,33 @@
 @import url("/static/tailwind.min.css");
+
+.bg-colorful{
+	background-color: #2EC4B6;
+}
+
+.bg-dark {
+	background-color: #3B413C;
+}
+
+.bg-colorful .text-colorful-bg{
+	color: #95F9E3;
+}
+
+.bg-colorful .border-colorful-bg{
+	border-color: #95F9E3;
+}
+
+.semi-transparent{
+	opacity: 0.8;
+}
+
+nav {
+	color: #17625b;
+}
+
+.text-lighten-on-hover:hover {
+	color: #2EC4B6;
+}
+
+.border-darken {
+	border-color: #2EC4B6;
+}
