@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% black title %}Feed{% endblock %}
 {% block page %}
 <div class="w-full flex flex-wrap">
     {% for project in projects %}
@@ -8,10 +9,13 @@
             <div class="px-6 py-4">
                 <div class="font-bold text-2xl mb-2">{{project.title}}</div>
                 <p class="text-gray-700 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                    {{project.desc}}
                 </p>
             </div>
             <div class="px-6 py-4">
+                {% for tag in project.tags %}
+                <span class="inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{tag}}</span>
+                {% endfor %}
                 <span class="inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
                 <span class="inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
                 <span class="inline-block bg-gray-200 rounded  px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
