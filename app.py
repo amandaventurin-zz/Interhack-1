@@ -11,6 +11,7 @@ class Project:
     self,
     title,
     image,
+    plogo,
     tags,
     desc,
     processo_seletivo,
@@ -19,7 +20,8 @@ class Project:
     campus,
     instituto,
     curso,
-    periodo):
+    periodo,
+    bolsa):
     global new_pid
     self.pid = new_pid
     new_pid += 1
@@ -34,32 +36,52 @@ class Project:
     self.processo_seletivo = processo_seletivo
     self.periodo = periodo
     self.contato = contato
+    self.bolsa = bolsa
+    self.plogo = plogo
 
 projects = [
   Project(
     title='Grace',
-    image='/static/img/grace.svg',
-    tags=set(),
-    desc='aaaaaa',
+    image='/static/img/GRACE_logo.svg',
+    plogo='/static/img/grace.svg',
+    tags={'Mulheres', 'Computação', 'Empreendedorismo'},
+    desc='Garotas na computação e Empreendedorismo',
     universidade='USP',
     campus='USP Leste',
     instituto='EACH',
     curso='SI',
-    periodo='Flexivel',
-    processo_seletivo='dsds',
-    contato='190'),
+    periodo='Flexível',
+    processo_seletivo='',
+    contato='190',
+    bolsa=True),
   Project(
-    title='Flower',
-    image='/static/img/card-top.jpg',
-    tags={'SAUDE'},
-    desc='uuuuuu',
+    title='PET SI',
+    image='/static/img/pet-si.jpg',
+    plogo='/static/img/pet-logo.jpg',
+    tags={'SI', 'Educação', 'Bolsas'},
+    desc='Programa de Educação Tutorial',
     universidade='USP',
     campus='USP Leste',
     instituto='EACH',
-    curso='TM',
-    periodo='Flexivel',
-    processo_seletivo='dsds',
-    contato='190')
+    curso='SI',
+    periodo='Flexível',
+    processo_seletivo='',
+    contato='190',
+    bolsa=False),
+  Project(
+    title='USPCodeLab',
+    image='/static/img/ucl-header.svg',
+    plogo='/static/img/ucl-logo.svg',
+    tags={'SI', 'BCC', 'Hackathon'},
+    desc='Grupo de extensão que visa estimular a inovação tecnológica na USP',
+    universidade='USP',
+    campus='',
+    instituto='Todos',
+    curso='SI',
+    periodo='Flexível',
+    processo_seletivo='',
+    contato='190',
+    bolsa=False)
 ]
 
 def search(
@@ -68,20 +90,32 @@ def search(
   universidade='',
   campus='',
   instituto='',
-  curso=''):
+  curso='',
+  titulo='',
+  periodo='',
+  bolsa=False):
   ret = []
+
+  if periodo == 'Flexível':
+    periodo = ''
+
   for p in projects:
     uni = re.compile(universidade)
     cam = re.compile(campus)
     ins = re.compile(instituto)
     cur = re.compile(curso)
+    per = re.compile(periodo)
+    tit = re.compile(titulo)
 
     if not p.tags.issuperset(tags): continue
     if uni.search(p.universidade) is None: continue
     if cam.search(p.campus) is None: continue
     if ins.search(p.instituto) is None: continue
     if cur.search(p.curso) is None: continue
-    
+    if per.search(p.periodo) is None: continue
+    if tit.search(p.title) is None: continue
+    if bolsa and not p.bolsa: continue
+
     ret.append(p)
   return ret
 
@@ -124,22 +158,24 @@ def foo(name):
 def form_search():
   form = request.form
   #return f'{form}'
-  tags = set()
-  if form.get('tag-saude')   == 'on': tags.add('SAUDE') 
-  if form.get('tag-lgbt')    == 'on': tags.add('LGBT') 
-  if form.get('tag-esporte') == 'on': tags.add('ESPORTE') 
-  uni = form.get('universidade')
-  cam = form.get('campus')
-  ins = form.get('instituto')
-  cur = form.get('curso')
+  uni = form.get('pesquisar-universidade')
+  cam = form.get('pesquisar-campus')
+  ins = form.get('pesquisar-instituto')
+  cur = form.get('pesquisar-curso')
+  tit = form.get('pesquisar-pesquisar')
+  per = form.get('pesquisar-periodo')
+  bol = form.get('pesquisar-bolsa') == 'ok'
 
   p = search(
     projects=projects,
-    tags=tags,
+    tags=set(),
     universidade=uni,
     campus=cam,
     instituto=ins,
-    curso=cur)
+    curso=cur,
+    titulo=tit,
+    periodo=per,
+    bolsa=bol)
   return render_template('feed.html', projects=p)
 
 @app.route('/form-add/', methods=['POST'])
@@ -147,7 +183,7 @@ def form_add():
   form = request.form
   uni = form.get('novop-universidade')
   cam = form.get('novop-campus')
-  ins = form.get('novop-instituicao')
+  ins = form.get('novop-instituto')
   cur = form.get('novop-curso')
   per = form.get('novop-periodo')
   des = form.get('novop-descricao')
@@ -158,7 +194,8 @@ def form_add():
   projects.append(Project(
     title=tit,
     image='/static/img/add_img.png',
-    tags={'SAUDE'},
+    plogo='/static/img/add_img.png',
+    tags={'TAG'},
     desc=des,
     universidade=uni,
     campus=cam,
@@ -166,5 +203,6 @@ def form_add():
     curso=cur,
     periodo=per,
     processo_seletivo=pro,
-    contato=con))
-  return f'{form}'
+    contato=con,
+    bolsa=True))
+  return redirect('/feed/')

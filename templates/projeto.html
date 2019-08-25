@@ -4,8 +4,8 @@
 <div class="mx-auto max-w-6xl sm:px-4 md:px-40 py-4 container rounded shadow-lg bg-white">
     <div class="mx-auto container flex flex-row items-center">
         <div class="w-1/4 pb-6">
-            <div class="w-16 h-16 md:w-32 md:h-32 flex items-center justify-center border-4 rounded-full overflow-hidden">
-                <img class="h-16 md:h-32 object-cover" src="{{ project.image }}"/>
+            <div class="w-16 h-16 md:w-32 md:h-32 flex items-center justify-center shadow-lg rounded-full overflow-hidden">
+                <img class="h-16 md:h-32 object-cover" src="{{ project.plogo }}"/>
             </div>
         </div>
         <div class="w-1/2 font-bold text-5xl">
@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="flex flex-row pb-6">
-        <img class="w-4 mr-2" src="/static/img/location_icon.svg"/> {{ project.campus }}, {{ project.instituto }}
+        <img class="w-4 mr-2" src="/static/img/location_icon.svg"/> {{ project.universidade }}, {{ project.instituto }}
         <img class="w-6 mx-2" src="/static/img/time_icon.svg"/> {{ project.periodo }}
     </div>
     <div class="pb-6">
@@ -27,9 +27,9 @@
     <div>
         <span class="font-bold text-lg">Tags: <br/></span>
         <div class="py-2">
-            <span class="inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">SÓ MENINAS</span>
-            <span class="inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">VÃO EMBORA MENINOS</span>
-            <span class="inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">VC TAMBÉM STEFANY SUA MAU AMADA</span>
+                {% for tag in project.tags %}
+                <span class="inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{tag}}</span>
+                {% endfor %}
         </div>
     </div>
     
