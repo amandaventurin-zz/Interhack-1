@@ -3,6 +3,8 @@ import re
 
 app = Flask(__name__)
 
+new_pid = 0
+
 class Project:
   
   def __init__(
@@ -11,11 +13,16 @@ class Project:
     image,
     tags,
     desc,
+    processo_seletivo,
+    contato,
     universidade,
     campus,
     instituto,
     curso,
-    favorito):
+    periodo):
+    global new_pid
+    self.pid = new_pid
+    new_pid += 1
     self.title = title
     self.image = image
     self.tags  = tags
@@ -24,7 +31,9 @@ class Project:
     self.campus = campus
     self.instituto = instituto
     self.curso = curso
-    self.favorito = favorito
+    self.processo_seletivo = processo_seletivo
+    self.periodo = periodo
+    self.contato = contato
 
 projects = [
   Project(
@@ -36,17 +45,21 @@ projects = [
     campus='USP Leste',
     instituto='EACH',
     curso='SI',
-    favorito=True),
+    periodo='Flexivel',
+    processo_seletivo='dsds',
+    contato='190'),
   Project(
     title='Flower',
     image='/static/img/card-top.jpg',
     tags={'SAUDE'},
-    desc='',
+    desc='uuuuuu',
     universidade='USP',
     campus='USP Leste',
     instituto='EACH',
     curso='TM',
-    favorito=False)
+    periodo='Flexivel',
+    processo_seletivo='dsds',
+    contato='190')
 ]
 
 def search(
@@ -55,8 +68,7 @@ def search(
   universidade='',
   campus='',
   instituto='',
-  curso='',
-  favorito=False):
+  curso=''):
   ret = []
   for p in projects:
     uni = re.compile(universidade)
@@ -69,9 +81,13 @@ def search(
     if cam.search(p.campus) is None: continue
     if ins.search(p.instituto) is None: continue
     if cur.search(p.curso) is None: continue
-    if favorito and not p.favorito: continue
+    
     ret.append(p)
   return ret
+
+def search_pid(projects, pid):
+  for p in projects:
+    if p.pid == pid: return p 
 
 @app.route('/')
 def hello():
@@ -83,11 +99,13 @@ def feed():
 
 @app.route('/projeto/')
 def projeto():
-  return render_template('projeto.html')
+  pid = int(request.args.get("pid", None))
+  p = search_pid(projects, pid)
+  return render_template('projeto.html', project = p)
 
-@app.route('/pesquisa/')
+@app.route('/pesquisar/')
 def pesquisa():
-  return render_template('Pesquisa.html')
+  return render_template('pesquisar.html')
 
 @app.route('/login/')
 def login():
@@ -95,22 +113,17 @@ def login():
 
 @app.route('/novo_projeto/')
 def novo_projeto():
-  return render_template('novo_projeto.html')
-
-@app.route('/favoritos/')
-def favoritos():
-  p = search(projects, favorito=True)
-  return render_template('feed.html', projects=p)
+  return render_template('novo_projeto.html', project=search_pid(projects, 0))
 
 @app.route('/<name>')
 def foo(name):
   return render_template(name)
 
 
-@app.route('/form-test/', methods=['POST'])
-def form_test():
+@app.route('/form-search/', methods=['POST'])
+def form_search():
   form = request.form
-  
+  #return f'{form}'
   tags = set()
   if form.get('tag-saude')   == 'on': tags.add('SAUDE') 
   if form.get('tag-lgbt')    == 'on': tags.add('LGBT') 
@@ -126,6 +139,32 @@ def form_test():
     universidade=uni,
     campus=cam,
     instituto=ins,
-    curso=cur,
-    favorito=False)
+    curso=cur)
   return render_template('feed.html', projects=p)
+
+@app.route('/form-add/', methods=['POST'])
+def form_add():
+  form = request.form
+  uni = form.get('novop-universidade')
+  cam = form.get('novop-campus')
+  ins = form.get('novop-instituicao')
+  cur = form.get('novop-curso')
+  per = form.get('novop-periodo')
+  des = form.get('novop-descricao')
+  pro = form.get('novop-processo')
+  con = form.get('novop-contato')
+  tit = form.get('novop-titulo')
+
+  projects.append(Project(
+    title=tit,
+    image='/static/img/add_img.png',
+    tags={'SAUDE'},
+    desc=des,
+    universidade=uni,
+    campus=cam,
+    instituto=ins,
+    curso=cur,
+    periodo=per,
+    processo_seletivo=pro,
+    contato=con))
+  return f'{form}'
