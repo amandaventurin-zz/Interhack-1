@@ -8,38 +8,43 @@
 </head>
 <body>
     <div id="content">
-    	<nav class="flex items-center justify-between flex-wrap p-6">
+    	{% block content %}
+    	<nav class="flex items-center justify-between flex-wrap bg-white shadow-lg p-4">
 		  <div class="flex items-center flex-shrink-0 mr-6">
-		  	<img src="/static/img/logo.svg" class="h-8 w-8 mr-2"/>
+		  	<img src="/static/img/logo.svg" class="h-8 mr-2"/>
 		  </div>
 		  <div class="block lg:hidden">
-		    <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+		    <button class="flex items-center px-3 py-2 border rounded text-colorful-bg border-colorful-bg hover:text-lighten-on-hover hover:border-darken">
 		      <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
 		    </button>
 		  </div>
 		  <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
 		    <div class="text-sm lg:flex-grow">
-		      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-		        Docs
+		      <a href="novo_projeto" class="block mt-4 lg:inline-block lg:mt-0 text-colorful-bg text-lighten mr-4">
+		        Feed
 		      </a>
-		      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-		        Examples
+		      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-colorful-bg text-lighten-on-hover mr-4">
+		        Pesquisar projetos
 		      </a>
-		      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
-		        Blog
+		      <a href="novo_projeto" class="block mt-4 lg:inline-block lg:mt-0 text-colorful-bg text-lighten-on-hover mr-4">
+		        Adicionar projeto
+		      </a>
+		      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-colorful-bg text-lighten-on-hover">
+		        Favoritos
 		      </a>
 		    </div>
-		    <div>
-		      <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Download</a>
-		    </div>
+		    
 		  </div>
 		</nav>
-    	{% block content %}{% endblock %}
+    	{% endblock %}
 	</div>
-    <div id="footer">
-        {% block footer %}
-        &copy; Copyright 2019 by <a href="/static/landing.html">Agregari</a>.
-        {% endblock %}
+    {% block footer %}
+    <div id="footer" class="bg-colorful text-white flex items-center justify-between flex-wrap px-4 py-10">
+        <div class="float-left">
+		  	<img src="/static/img/logo-white.svg" class="h-5 semi-transparent"/>
+		</div>
+    	<span class="mx-auto">&copy; Copyright 2019 by <a href="/static/landing.html">Agregari</a>.</span>
     </div>
+    {% endblock %}
 </body>
 </html>
