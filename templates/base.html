@@ -38,12 +38,16 @@
 		</nav>
     	{% endblock %}
 	</div>
+	{% block page %}{% endblock %}
     {% block footer %}
-    <div id="footer" class="bg-colorful text-white flex items-center justify-between flex-wrap px-4 py-10">
-        <div class="float-left">
+    <div id="footer" class="desktop-footer bg-colorful text-white flex items-center justify-between flex-wrap px-4 py-10">
+        <div class="w-1/4">
 		  	<img src="/static/img/logo-white.svg" class="h-5 semi-transparent"/>
 		</div>
-    	<span class="mx-auto">&copy; Copyright 2019 by <a href="/static/landing.html">Agregari</a>.</span>
+		<div class="w-1/2 text-center">
+			&copy; Copyright 2019 by <a href="/static/landing.html">Agregari</a>.
+		</div>
+		<span class="w-1/4"></span>
     </div>
     {% endblock %}
 </body>

@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="/static/style.css" type="text/css"></link>
+{% extends "base.html" %}
+{% block page %}
 <div class="w-full flex flex-wrap">
     {% for project in projects %}
     <a href="/projetos.html" class="w-full md:w-1/2 lg:w-1/4 px-4 py-4">
@@ -19,3 +20,4 @@
     </a>
     {% endfor %}
 </div>
+{% endblock %}

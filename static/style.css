@@ -31,3 +31,9 @@ nav {
 .border-darken {
 	border-color: #2EC4B6;
 }
+
+@media(max-width: 640px) {
+	 .desktop-footer {
+		display: none;
+	}
+}
